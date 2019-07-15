@@ -7,4 +7,5 @@
     <string name="navbar_people">People</string>
     <string name="navbar_myaccount">My Account</string>
     <string name="btn_continue_sign_in">Continue &amp; Sign In</string>>
+    <string name="sing_in_label">Start firing messages</string>
 </resources>

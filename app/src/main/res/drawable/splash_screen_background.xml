@@ -3,9 +3,8 @@
 
     <item android:drawable="@android:color/white"/>
 
-    <item>
-        <bitmap android:src="@drawable/ic_filter_vintage_color_primary_126dp"
-        android:gravity="center"/>
+    <item android:gravity="center"
+          android:drawable="@drawable/ic_filter_vintage_color_primary_126dp">
     </item>
 
 </layer-list>
