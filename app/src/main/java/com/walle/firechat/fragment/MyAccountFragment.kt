@@ -75,6 +75,7 @@ class MyAccountFragment : Fragment() {
             val selectedImagePath = data.data
             val selectedImageBmp = MediaStore.Images.Media.getBitmap(activity!!.contentResolver, selectedImagePath)
             // val selectedImageBmp = ImageDecoder.createSource(this.getContentResolver(), selectedImagePath)
+            //TODO: crop center & use round image
 
             if(selectedImageBmp != null) {
                 val outputStream = ByteArrayOutputStream()

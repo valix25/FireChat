@@ -35,6 +35,7 @@ class SignInActivity : AppCompatActivity() {
                 .build()
             startActivityForResult(intent, RC_SIGN_IN)
         }
+        //TODO: add email verification (maybe password reset as well?)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
