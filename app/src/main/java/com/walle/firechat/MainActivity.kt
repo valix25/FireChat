@@ -4,18 +4,18 @@ import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import android.widget.TextView
+import androidx.fragment.app.Fragment
+import com.walle.firechat.fragment.MyAccountFragment
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var textMessage: TextView
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.navigation_people -> {
-                textMessage.setText(R.string.navbar_people)
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_my_account -> {
-                textMessage.setText(R.string.navbar_myaccount)
+                replaceFragment(MyAccountFragment())
                 return@OnNavigationItemSelectedListener true
             }
         }
@@ -27,7 +27,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
 
-        textMessage = findViewById(R.id.message)
         navView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
+    }
+
+    private fun replaceFragment(fragment: Fragment) {
+        supportFragmentManager.beginTransaction().replace(R.id.fragment_layout, fragment).commit()
     }
 }
