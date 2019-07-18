@@ -25,6 +25,7 @@ import kotlinx.android.synthetic.main.fragment_my_account.view.editText_name
 import org.jetbrains.anko.clearTask
 import org.jetbrains.anko.newTask
 import org.jetbrains.anko.support.v4.intentFor
+import org.jetbrains.anko.support.v4.toast
 import java.io.ByteArrayOutputStream
 
 
@@ -56,6 +57,7 @@ class MyAccountFragment : Fragment() {
                 } else {
                     FirestoreUtil.updateCurrentUser(editText_name.text.toString(), editText_bio.text.toString(), null)
                 }
+                toast("Saving!")
             }
 
             btn_sign_out.setOnClickListener {

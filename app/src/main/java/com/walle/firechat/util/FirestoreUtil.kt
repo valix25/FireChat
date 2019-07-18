@@ -1,9 +1,14 @@
 package com.walle.firechat.util
 
+import android.content.Context
+import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ListenerRegistration
 import com.walle.firechat.model.User
+import com.walle.firechat.recyclerview.item.PersonItem
+import com.xwray.groupie.kotlinandroidextensions.Item
 
 // object is basically a singleton so only one is present at any single moment
 // Object declaration's initialization is thread-safe.
@@ -51,4 +56,28 @@ object FirestoreUtil {
             it.toObject(User::class.java)?.let { it1 -> onComplete(it1) }
         }
     }
+
+    fun addUsersListener(context: Context, onListen: (List<Item>) -> Unit): ListenerRegistration {
+        return firestoreInstance.collection("users")
+            .addSnapshotListener { querySnapshot, firebaseFirestoreException ->
+                if (firebaseFirestoreException != null) {
+                    Log.e("Firestore", "Users listener error", firebaseFirestoreException)
+                    return@addSnapshotListener
+                }
+
+                val items = mutableListOf<Item>()
+                querySnapshot?.documents?.forEach {
+                    if(it.id != FirebaseAuth.getInstance().currentUser?.uid) {
+                        it.toObject(User::class.java)?.let { it1 -> PersonItem(it1, it.id, context) }?.let { it2 ->
+                            items.add(
+                                it2
+                            )
+                        }
+                    }
+                }
+                onListen(items)
+            }
+    }
+
+    fun removeListener(registration: ListenerRegistration) = registration.remove()
 }
