@@ -7,6 +7,7 @@ import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ListenerRegistration
 import com.walle.firechat.model.*
+import com.walle.firechat.recyclerview.item.ImageMessageItem
 import com.walle.firechat.recyclerview.item.PersonItem
 import com.walle.firechat.recyclerview.item.TextMessageItem
 import com.xwray.groupie.kotlinandroidextensions.Item
@@ -132,7 +133,11 @@ object FirestoreUtil {
                                 )
                             }
                         } else {
-                            //TODO: Add image message
+                            it.toObject(ImageMessage::class.java)?.let { it1 -> ImageMessageItem(it1, context) }?.let { it2 ->
+                                items.add(
+                                    it2
+                                )
+                            }
                         }
                     }
                 }
