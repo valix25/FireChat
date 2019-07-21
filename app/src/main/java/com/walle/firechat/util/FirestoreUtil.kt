@@ -6,10 +6,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ListenerRegistration
-import com.walle.firechat.model.ChatChannel
-import com.walle.firechat.model.MessageType
-import com.walle.firechat.model.TextMessage
-import com.walle.firechat.model.User
+import com.walle.firechat.model.*
 import com.walle.firechat.recyclerview.item.PersonItem
 import com.walle.firechat.recyclerview.item.TextMessageItem
 import com.xwray.groupie.kotlinandroidextensions.Item
@@ -141,5 +138,11 @@ object FirestoreUtil {
                 }
                 onListen(items)
             }
+    }
+
+    fun sendMessage(message: Message, channelId: String) {
+        chatChannelsCollectionRef.document(channelId)
+            .collection("messages")
+            .add(message)
     }
 }
