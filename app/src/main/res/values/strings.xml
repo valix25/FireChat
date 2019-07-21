@@ -16,4 +16,7 @@
     <string name="my_account_fragment_save">Save</string>
     <string name="my_account_fragment_my_bio">My Bio</string>
     <string name="my_account_fragment_my_name">My Name</string>
+
+    <string name="chat_activity_fire_message">Fire your message</string>
+    <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</string>
 </resources>
