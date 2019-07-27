@@ -19,7 +19,6 @@ import com.xwray.groupie.Section
 import com.xwray.groupie.kotlinandroidextensions.Item
 import com.xwray.groupie.kotlinandroidextensions.ViewHolder
 import kotlinx.android.synthetic.main.activity_chat.*
-import org.jetbrains.anko.toast
 import java.io.ByteArrayOutputStream
 import java.util.*
 
@@ -75,7 +74,7 @@ class ChatActivity : AppCompatActivity() {
 
             val outputStream = ByteArrayOutputStream()
             selectedImageBmp.compress(Bitmap.CompressFormat.JPEG, 90, outputStream)
-            var selectedImageBytes = outputStream.toByteArray()
+            val selectedImageBytes = outputStream.toByteArray()
 
             StorageUtil.uploadMessageImage(selectedImageBytes) {imagePath ->  
                 val messageToSend = ImageMessage(imagePath, Calendar.getInstance().time,

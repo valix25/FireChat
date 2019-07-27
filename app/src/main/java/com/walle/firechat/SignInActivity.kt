@@ -7,6 +7,8 @@ import android.os.Bundle
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.ErrorCodes
 import com.firebase.ui.auth.IdpResponse
+import com.google.firebase.iid.FirebaseInstanceId
+import com.walle.firechat.service.MyFirebaseInstanceIDService
 import com.walle.firechat.util.FirestoreUtil
 import kotlinx.android.synthetic.main.activity_sign_in.*
 import org.jetbrains.anko.*
@@ -36,6 +38,7 @@ class SignInActivity : AppCompatActivity() {
             startActivityForResult(intent, RC_SIGN_IN)
         }
         //TODO: add email verification (maybe password reset as well?)
+        //TODO: add option in firebase ui to go back so you can put in your email again
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -48,6 +51,12 @@ class SignInActivity : AppCompatActivity() {
                 val progressDialog = indeterminateProgressDialog("Setting up your account")
                 FirestoreUtil.initCurrentUserIfFirstTime {
                     startActivity(intentFor<MainActivity>().newTask().clearTask())
+
+                    FirebaseInstanceId.getInstance().instanceId.addOnSuccessListener(this) {instanceIdResult ->
+                        val registrationToken = instanceIdResult.token
+                        MyFirebaseInstanceIDService.addTokenToFirestore(registrationToken)
+                    }
+
                     progressDialog.dismiss()
                 }
             } else if(resultCode == Activity.RESULT_CANCELED) {
