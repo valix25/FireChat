@@ -58,6 +58,8 @@ dependencies {
     // groupie
     implementation 'com.xwray:groupie:2.3.0'
     implementation 'com.xwray:groupie-kotlin-android-extensions:2.3.0'
+    // circle imageview
+    implementation 'de.hdodenhof:circleimageview:3.0.0'
 
     kotlin {
         experimental {
