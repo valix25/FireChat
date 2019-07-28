@@ -38,7 +38,7 @@ class SignInActivity : AppCompatActivity() {
             startActivityForResult(intent, RC_SIGN_IN)
         }
         //TODO: add email verification (maybe password reset as well?)
-        //TODO: add option in firebase ui to go back so you can put in your email again
+        //TODO: add option in firebase ui to go back so you can put in your email again or don't use firebase ui?
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

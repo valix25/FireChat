@@ -13,7 +13,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:background="@drawable/rect_round_primary_color">
+            android:background="@drawable/rect_round_accent_color">
         <!--adjustViewBounds allows the ImageView to adjust itself in order
         to preserve the aspect ratio of its drawable (i.e. image content)-->
         <ImageView

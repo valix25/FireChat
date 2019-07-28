@@ -35,7 +35,7 @@ abstract class MessageItem (private val message: Message)
             }
         } else {
             viewHolder.message_root.apply {
-                backgroundResource = R.drawable.rect_round_primary_color
+                backgroundResource = R.drawable.rect_round_accent_color
                 val lparams = FrameLayout.LayoutParams(wrapContent, wrapContent, Gravity.START)
                 this.layoutParams = lparams
             }

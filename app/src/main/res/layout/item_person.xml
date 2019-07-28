@@ -29,7 +29,7 @@
                 android:layout_height="60dp"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="20dp"
-                android:src="@drawable/ic_account_circle_black_160dp"
+                android:src="@drawable/ic_account_circle_160dp"
                 app:civ_border_color="@color/colorPrimary"
                 app:civ_border_width="2dp"/>
 
@@ -42,7 +42,7 @@
                 android:layout_marginTop="5dp"
                 android:textSize="25sp"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat"
-                tools:text="Reso Coder" />
+                tools:text="Name" />
 
         <TextView
                 android:id="@+id/textView_bio"
@@ -54,7 +54,7 @@
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                tools:text="Reso Coder" />
+                tools:text="Bio information" />
     </RelativeLayout>
 
 </androidx.cardview.widget.CardView>

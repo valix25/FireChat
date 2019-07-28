@@ -24,6 +24,7 @@ import org.jetbrains.anko.support.v4.startActivity
 
 
 class PeopleFragment : Fragment() {
+    // TODO: add search bar to search people
 
     // Remember the firestore listener in order to remove it later
     private lateinit var userListenerRegistration: ListenerRegistration

@@ -4,8 +4,6 @@ package com.walle.firechat.fragment
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.graphics.ImageDecoder
 import android.os.Bundle
 import android.provider.MediaStore
 import androidx.fragment.app.Fragment
@@ -76,8 +74,6 @@ class MyAccountFragment : Fragment() {
         if(requestCode == RC_SELECT_IMAGE && resultCode == Activity.RESULT_OK && data != null && data.data != null) {
             val selectedImagePath = data.data
             val selectedImageBmp = MediaStore.Images.Media.getBitmap(activity!!.contentResolver, selectedImagePath)
-            // val selectedImageBmp = ImageDecoder.createSource(this.getContentResolver(), selectedImagePath)
-            //TODO: crop center & use round image
 
             if(selectedImageBmp != null) {
                 val outputStream = ByteArrayOutputStream()
