@@ -5,6 +5,7 @@ import android.widget.FrameLayout
 import com.google.firebase.auth.FirebaseAuth
 import com.walle.firechat.R
 import com.walle.firechat.model.Message
+import com.walle.firechat.model.MessageType
 import com.xwray.groupie.kotlinandroidextensions.Item
 import com.xwray.groupie.kotlinandroidextensions.ViewHolder
 import kotlinx.android.synthetic.main.item_text_message.*
@@ -29,13 +30,17 @@ abstract class MessageItem (private val message: Message)
     private fun setMessageRootGravity(viewHolder: ViewHolder) {
         if(message.senderId == FirebaseAuth.getInstance().currentUser?.uid) {
             viewHolder.message_root.apply {
-                backgroundResource = R.drawable.rect_round_white
+                if(message.type == MessageType.TEXT) {
+                    backgroundResource = R.drawable.rect_round_white
+                }
                 val lparams = FrameLayout.LayoutParams(wrapContent, wrapContent, Gravity.END)
                 this.layoutParams = lparams
             }
         } else {
             viewHolder.message_root.apply {
-                backgroundResource = R.drawable.rect_round_accent_color
+                if(message.type == MessageType.TEXT) {
+                    backgroundResource = R.drawable.rect_round_accent_color
+                }
                 val lparams = FrameLayout.LayoutParams(wrapContent, wrapContent, Gravity.START)
                 this.layoutParams = lparams
             }

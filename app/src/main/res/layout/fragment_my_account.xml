@@ -25,15 +25,15 @@
             app:civ_border_color="@color/colorPrimary"
             tools:ignore="ContentDescription"/>
 
-    <!--TODO: Change text fields design-->
-    <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editText_name"
-            android:layout_width="0dp"
+    <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/editTextLayout_name"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart = "8dp"
+            android:layout_marginEnd = "8dp"
             android:layout_marginBottom="8dp"
             android:layout_marginTop="32dp"
             android:hint="@string/my_account_fragment_my_name"
-            android:textAlignment="center"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -41,25 +41,71 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/imageView_profile_picture"
-            app:layout_constraintVertical_bias="0.025" />
-
+            app:layout_constraintVertical_bias="0.025"
+            style = "@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
     <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editText_bio"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:maxHeight="150dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginTop="8dp"
-            android:hint="@string/my_account_fragment_my_bio"
-            android:textAlignment="center"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/editText_name"
-            app:layout_constraintVertical_bias="0.042" />
+            android:id="@+id/editText_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/editTextLayout_bio"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart = "8dp"
+        android:layout_marginEnd = "8dp"
+        android:layout_marginTop="8dp"
+        android:hint="@string/my_account_fragment_my_bio"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/editTextLayout_name"
+        app:layout_constraintVertical_bias="0.042"
+        style = "@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/editText_bio"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!--<com.google.android.material.textfield.TextInputEditText-->
+            <!--android:id="@+id/editText_name"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginBottom="8dp"-->
+            <!--android:layout_marginTop="32dp"-->
+            <!--android:hint="@string/my_account_fragment_my_name"-->
+            <!--android:textAlignment="center"-->
+            <!--app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--app:layout_constraintEnd_toEndOf="parent"-->
+            <!--app:layout_constraintHorizontal_bias="0.0"-->
+            <!--app:layout_constraintLeft_toLeftOf="parent"-->
+            <!--app:layout_constraintRight_toRightOf="parent"-->
+            <!--app:layout_constraintStart_toStartOf="parent"-->
+            <!--app:layout_constraintTop_toBottomOf="@id/imageView_profile_picture"-->
+            <!--app:layout_constraintVertical_bias="0.025"/>-->
+
+    <!--<com.google.android.material.textfield.TextInputEditText-->
+            <!--android:id="@+id/editText_bio"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginBottom="8dp"-->
+            <!--android:layout_marginTop="32dp"-->
+            <!--android:hint="@string/my_account_fragment_my_bio"-->
+            <!--android:textAlignment="center"-->
+            <!--app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--app:layout_constraintEnd_toEndOf="parent"-->
+            <!--app:layout_constraintHorizontal_bias="0.0"-->
+            <!--app:layout_constraintLeft_toLeftOf="parent"-->
+            <!--app:layout_constraintRight_toRightOf="parent"-->
+            <!--app:layout_constraintStart_toStartOf="parent"-->
+            <!--app:layout_constraintTop_toBottomOf="@id/editText_name"-->
+            <!--app:layout_constraintVertical_bias="0.025"/>-->
 
     <Button
             android:id="@+id/btn_save"
