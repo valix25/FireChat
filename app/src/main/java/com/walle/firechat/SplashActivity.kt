@@ -9,7 +9,8 @@ class SplashActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if(FirebaseAuth.getInstance().currentUser == null) {
+        val currentUser = FirebaseAuth.getInstance().currentUser
+        if(currentUser == null || !currentUser.isEmailVerified) {
             startActivity<SignInActivity>()
         } else {
             startActivity<MainActivity>()
