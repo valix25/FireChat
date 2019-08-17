@@ -1,13 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             tools:context=".fragment.PeopleFragment">
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        tools:context=".fragment.PeopleFragment">
+    <!--<EditText-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:id="@+id/searchBar"-->
+            <!--android:hint="Search text"-->
+            <!--app:layout_constraintBottom_toTopOf="@id/recycler_view_people"-->
+            <!--app:layout_constraintEnd_toEndOf="parent"-->
+            <!--app:layout_constraintLeft_toLeftOf="parent"-->
+            <!--app:layout_constraintRight_toRightOf="parent"-->
+            <!--app:layout_constraintStart_toStartOf="parent"-->
+            <!--app:layout_constraintTop_toTopOf="parent" />-->
+    <!--<SearchView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:id="@+id/searchBar"-->
+            <!--android:queryHint="Search text"-->
+            <!--android:iconifiedByDefault="false"-->
+            <!--app:layout_constraintBottom_toTopOf="@id/recycler_view_people"-->
+            <!--app:layout_constraintEnd_toEndOf="parent"-->
+            <!--app:layout_constraintLeft_toLeftOf="parent"-->
+            <!--app:layout_constraintRight_toRightOf="parent"-->
+            <!--app:layout_constraintStart_toStartOf="parent"-->
+            <!--app:layout_constraintTop_toTopOf="parent"/>-->
+    <com.mancj.materialsearchbar.MaterialSearchBar
+            style="@style/MaterialSearchBarLight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/searchBar"
+            app:mt_speechMode="false"
+            app:mt_roundedSearchBarEnabled="true"
+            app:mt_hint="Type name and press the search button"
+            app:mt_maxSuggestionsCount="10"
+            app:mt_placeholder="Search"
+            app:mt_placeholderColor="@color/colorAccent"
+            app:mt_navIconEnabled="false"
+            app:mt_textColor="@color/colorPrimary"
+            app:layout_constraintBottom_toTopOf="@id/recycler_view_people"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+    </com.mancj.materialsearchbar.MaterialSearchBar>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_people"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         android:layout_width="match_parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/searchBar"
+        app:layout_constraintBottom_toBottomOf="parent"
     />
 
-</FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

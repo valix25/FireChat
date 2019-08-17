@@ -60,6 +60,9 @@ dependencies {
     implementation 'com.xwray:groupie-kotlin-android-extensions:2.3.0'
     // circle imageview
     implementation 'de.hdodenhof:circleimageview:3.0.0'
+    // search bar
+    //implementation 'com.github.mancj:MaterialSearchBar:0.8.2'
+    implementation 'com.github.simonebortolin:MaterialSearchBar:0.10'
 
     kotlin {
         experimental {
