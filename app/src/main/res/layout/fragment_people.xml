@@ -6,29 +6,6 @@
         android:layout_height="match_parent"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         tools:context=".fragment.PeopleFragment">
-    <!--<EditText-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:id="@+id/searchBar"-->
-            <!--android:hint="Search text"-->
-            <!--app:layout_constraintBottom_toTopOf="@id/recycler_view_people"-->
-            <!--app:layout_constraintEnd_toEndOf="parent"-->
-            <!--app:layout_constraintLeft_toLeftOf="parent"-->
-            <!--app:layout_constraintRight_toRightOf="parent"-->
-            <!--app:layout_constraintStart_toStartOf="parent"-->
-            <!--app:layout_constraintTop_toTopOf="parent" />-->
-    <!--<SearchView-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:id="@+id/searchBar"-->
-            <!--android:queryHint="Search text"-->
-            <!--android:iconifiedByDefault="false"-->
-            <!--app:layout_constraintBottom_toTopOf="@id/recycler_view_people"-->
-            <!--app:layout_constraintEnd_toEndOf="parent"-->
-            <!--app:layout_constraintLeft_toLeftOf="parent"-->
-            <!--app:layout_constraintRight_toRightOf="parent"-->
-            <!--app:layout_constraintStart_toStartOf="parent"-->
-            <!--app:layout_constraintTop_toTopOf="parent"/>-->
     <com.mancj.materialsearchbar.MaterialSearchBar
             style="@style/MaterialSearchBarLight"
             android:layout_width="match_parent"
@@ -36,12 +13,11 @@
             android:id="@+id/searchBar"
             app:mt_speechMode="false"
             app:mt_roundedSearchBarEnabled="true"
-            app:mt_hint="Type name and press the search button"
+            app:mt_hint="Type user name"
             app:mt_maxSuggestionsCount="10"
             app:mt_placeholder="Search"
-            app:mt_placeholderColor="@color/colorAccent"
+            app:mt_placeholderColor="@color/colorPrimary"
             app:mt_navIconEnabled="false"
-            app:mt_textColor="@color/colorPrimary"
             app:layout_constraintBottom_toTopOf="@id/recycler_view_people"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"

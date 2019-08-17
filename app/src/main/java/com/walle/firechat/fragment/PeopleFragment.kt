@@ -10,6 +10,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ListenerRegistration
 import com.walle.firechat.AppConstants
 import com.walle.firechat.ChatActivity
@@ -25,12 +27,8 @@ import com.xwray.groupie.kotlinandroidextensions.ViewHolder
 import kotlinx.android.synthetic.main.fragment_people.*
 import org.jetbrains.anko.support.v4.startActivity
 import com.mancj.materialsearchbar.MaterialSearchBar
-import android.view.Gravity
-import androidx.appcompat.widget.SearchView
-import androidx.core.view.GravityCompat
-import androidx.drawerlayout.widget.DrawerLayout
+import com.walle.firechat.model.User
 import kotlinx.android.synthetic.main.fragment_people.view.*
-import org.jetbrains.anko.support.v4.longToast
 
 
 class PeopleFragment : Fragment() {
@@ -41,62 +39,59 @@ class PeopleFragment : Fragment() {
 
     private lateinit var peopleSection: Section
 
-    private val lastSearches: List<String>? = null
-    private val drawer: DrawerLayout? = null
-
-    private lateinit var searchBarObj: android.widget.SearchView
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         userListenerRegistration = FirestoreUtil.addUsersListener(this.activity!!, this::updateRecyclerView)
 
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_people, container, false)
+        //TODO: optimize search by saving previous items and check if current filtered items are the same in which case
+        // don't update
         view.searchBar.setOnSearchActionListener(object: MaterialSearchBar.OnSearchActionListener {
             override fun onButtonClicked(buttonCode: Int) {
+                Log.i("search_query", "Pressed buttonCode $buttonCode")
                 when (buttonCode) {
                     MaterialSearchBar.BUTTON_NAVIGATION -> {
+                        Log.i("search_query", "Pressed BUTTON_NAVIGATION")
                     }
                     MaterialSearchBar.BUTTON_SPEECH -> {
+                        Log.i("search_query", "Pressed BUTTON_SPEECH")
                     }
-                    MaterialSearchBar.BUTTON_BACK -> searchBar.disableSearch()
+                    MaterialSearchBar.BUTTON_BACK -> {
+                        Log.i("search_query", "Pressed BUTTON_BACK")
+                        searchBar.disableSearch()
+                        resetUserList()
+                    }
                 }
             }
 
             override fun onSearchStateChanged(enabled: Boolean) {
-                Log.i("search_query", "searchStateChanged: $enabled")
             }
 
             override fun onSearchConfirmed(text: CharSequence?) {
-                Log.i("search_query", "searchConfirmed: $text")
+                //Log.i("search_query", "searchConfirmed: $text")
+                if(text.toString().isNotEmpty()) {
+                    filterSearch(text.toString())
+                }
             }
 
         })
         view.searchBar.addTextChangeListener(object: TextWatcher {
-            override fun afterTextChanged(p0: Editable?) {
-                Log.i("search_query", "afterTextChanged: $p0")
-            }
+            override fun afterTextChanged(p0: Editable?) =
+                //Log.i("search_query", "afterTextChanged: $p0")
+                if(p0.toString().isEmpty()) {
+                    resetUserList()
+                } else {
+                    filterSearch(p0.toString())
+                }
 
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                Log.i("search_query", "onTextChanged: $p0")
             }
 
         })
-//        view.searchBar.setOnQueryTextListener(object : android.widget.SearchView.OnQueryTextListener {
-//            override fun onQueryTextSubmit(p0: String?): Boolean {
-//                print("Text submitted: $p0")
-//                Log.i("query", " text submitted: $p0")
-//                return false
-//            }
-//
-//            override fun onQueryTextChange(p0: String?): Boolean {
-//                print("Text changed: $p0")
-//                return false
-//            }
-//        })
         return view
     }
 
@@ -126,6 +121,46 @@ class PeopleFragment : Fragment() {
         } else {
             updateItems()
         }
+    }
+
+    private fun filterSearch(keyword: String) {
+        val firestoreInstance = FirebaseFirestore.getInstance()
+        firestoreInstance.collection("users").get()
+            .addOnSuccessListener {querySnapshot ->
+                val items = mutableListOf<Item>()
+                querySnapshot.documents.forEach {
+                    if(it.id != FirebaseAuth.getInstance().currentUser?.uid) {
+                        it.toObject(User::class.java)?.let {user ->
+                            if (user.name.toLowerCase().contains(keyword.toLowerCase())) {
+                                PersonItem(user, it.id, this.activity!!)
+                            } else {
+                                null
+                            }
+                        }?.let {personItem ->
+                            items.add(personItem)
+                        }
+                    }
+                }
+                updateRecyclerView(items)
+            }
+    }
+
+    private fun resetUserList() {
+        val firestoreInstance = FirebaseFirestore.getInstance()
+        firestoreInstance.collection("users").get()
+            .addOnSuccessListener {querySnapshot ->
+                val items = mutableListOf<Item>()
+                querySnapshot.documents.forEach {
+                    if(it.id != FirebaseAuth.getInstance().currentUser?.uid) {
+                        it.toObject(User::class.java)?.let {user ->
+                            PersonItem(user, it.id, this.activity!!)
+                        }?.let {personItem ->
+                            items.add(personItem)
+                        }
+                    }
+                }
+                updateRecyclerView(items)
+            }
     }
 
     private val onItemClick = OnItemClickListener{ item, _ ->
