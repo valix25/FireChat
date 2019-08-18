@@ -26,4 +26,16 @@ class PersonItem(val user: User,
 
     override fun getLayout() = R.layout.item_person
 
+    override fun equals(other: Any?): Boolean {
+        if (other == null || other !is PersonItem) {
+            return false
+        }
+        return this.user == other.user && this.userId == other.userId
+    }
+
+    override fun hashCode(): Int {
+        var result = user.hashCode()
+        result = 31 * result + userId.hashCode()
+        return result
+    }
 }

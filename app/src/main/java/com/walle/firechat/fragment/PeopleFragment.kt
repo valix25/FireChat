@@ -39,14 +39,14 @@ class PeopleFragment : Fragment() {
 
     private lateinit var peopleSection: Section
 
+    private var previousUserList = mutableListOf<Item>()
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         userListenerRegistration = FirestoreUtil.addUsersListener(this.activity!!, this::updateRecyclerView)
 
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_people, container, false)
-        //TODO: optimize search by saving previous items and check if current filtered items are the same in which case
-        // don't update
         view.searchBar.setOnSearchActionListener(object: MaterialSearchBar.OnSearchActionListener {
             override fun onButtonClicked(buttonCode: Int) {
                 Log.i("search_query", "Pressed buttonCode $buttonCode")
@@ -123,6 +123,19 @@ class PeopleFragment : Fragment() {
         }
     }
 
+    private fun compareItems(items: List<Item>, items2: List<Item>): Boolean {
+        return if(items.size != items2.size) {
+            false
+        } else {
+            for (index in items.indices) {
+                if ((items[index] as PersonItem) != (items2[index] as PersonItem)) {
+                    return false
+                }
+            }
+            return true
+        }
+    }
+
     private fun filterSearch(keyword: String) {
         val firestoreInstance = FirebaseFirestore.getInstance()
         firestoreInstance.collection("users").get()
@@ -141,7 +154,10 @@ class PeopleFragment : Fragment() {
                         }
                     }
                 }
-                updateRecyclerView(items)
+                if(!compareItems(items, previousUserList)) {
+                    updateRecyclerView(items)
+                    previousUserList = items
+                }
             }
     }
 
@@ -159,7 +175,10 @@ class PeopleFragment : Fragment() {
                         }
                     }
                 }
-                updateRecyclerView(items)
+                if(!compareItems(items, previousUserList)){
+                    updateRecyclerView(items)
+                    previousUserList = items
+                }
             }
     }
 
