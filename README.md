@@ -5,6 +5,18 @@ Based on the tutorial series from [Reso Coder's Firebase Firestore Chat App](htt
 
 Main goal of the project was to learn a bit of Kotlin as mostly I've been working with Swift for developing iOS applications.
 
+# Screenshots
+
+<img src="screenshots/1.png" width="400">
+
+<img src="screenshots/2.png" width="400">
+
+<img src="screenshots/3.png" width="400">
+
+<img src="screenshots/4.png" width="400">
+
+<img src="screenshots/5.png" width="400">
+
 Currently supported features and TODOs:
 
 - [x] Firebase email login
